@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: ContinuousIntegration
+  displayName: "Continuous Integration Validation"
+  jobs:
+  - job: CodeValidation
+    displayName: "Source Code Validation"
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.10'
+
+    - script: |
+        echo "Executing batch simulation engine"
+        python workload/batch_simulation_engine.py
+      displayName: "Run Simulation Workload"
+
