@@ -19,6 +19,6 @@ stages:
 
     - script: |
         echo "Executing batch simulation engine"
-        python workload/batch_simulation_engine.py
+        python workload/batch-simulation-engine.py
       displayName: "Run Simulation Workload"
 
