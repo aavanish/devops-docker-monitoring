@@ -11,5 +11,5 @@ COPY workload/ /opt/simulation-engine/
 RUN pip install --no-cache-dir -r runtime_dependencies.txt
 
 ENTRYPOINT ["python"]
-CMD ["batch-simulation-engine.py"]
+CMD ["batch_simulation_engine.py"]
 
