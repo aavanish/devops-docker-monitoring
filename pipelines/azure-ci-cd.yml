@@ -13,14 +13,16 @@ pool:
 
 stages:
 - stage: BuildAndPublish
-  displayName: "Build & Publish Container Image"
+  displayName: "Build and Publish Container Image"
   jobs:
   - job: ContainerBuild
-    displayName: "Docker Image Build & Push"
+    displayName: "Container Build Job"
     steps:
 
+    - checkout: self
+
     - task: Docker@2
-      displayName: "Build & Push to Docker Hub"
+      displayName: "Build and Push to Docker Hub"
       inputs:
         containerRegistry: dockerhub-connection
         repository: $(dockerHubRepo)
@@ -31,7 +33,7 @@ stages:
           latest
 
     - task: Docker@2
-      displayName: "Build & Push to Azure Container Registry"
+      displayName: "Build and Push to Azure Container Registry"
       inputs:
         containerRegistry: acr-connection
         repository: $(acrRepo)
@@ -39,4 +41,3 @@ stages:
         Dockerfile: container/simulation-runtime.Dockerfile
         tags: |
           $(imageTag)
-
