@@ -7,13 +7,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: Docker@2
+  - script: |
+      docker pull emavi/batch-simulation-engine:v1.0.0
     displayName: "Pull simulation image from DockerHub"
-    inputs:
-      command: pull
-      repository: emavi/batch-simulation-engine
-      tags: |
-        v1.0.0
 
   - script: |
       docker run \
