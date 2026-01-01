@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Docker@2
+    displayName: "Pull simulation image from DockerHub"
+    inputs:
+      command: pull
+      repository: emavi/batch-simulation-engine
+      tags: |
+        v1.0.0
+
+  - script: |
+      docker run \
+        --cpus="1.0" \
+        --memory="512m" \
+        emavi/batch-simulation-engine:v1.0.0
+    displayName: "Run batch simulation container"
+
